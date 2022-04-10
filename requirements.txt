@@ -1,0 +1,5 @@
+Flask
+Flask-Mail
+sqlite3
+distutils.log
+tempfile 
