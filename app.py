@@ -1,4 +1,5 @@
 from distutils.log import debug
+import email
 import os
 import sqlite3
 
@@ -12,7 +13,7 @@ app = Flask(__name__)
 # Requires that "Less secure app access" be on
 # https://support.google.com/accounts/answer/6010255
 app.config["MAIL_DEFAULT_SENDER"] = os.environ["MAIL_DEFAULT_SENDER"]
-app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
+app.config["MAIL_PASSWORD"] = "tgjr redc grlb ugjg"
 app.config["MAIL_PORT"] = 465
 app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
@@ -50,11 +51,11 @@ def index():
 
         #db.execute("INSERT INTO form (customer_name , customer_address, customer_number, church_pastor, sermon_name, sermon_pastor, order_type) VALUES(?, ?, ?, ?, ?, ?, ?)", [customer_name , customer_address, customer_number, church_pastor, sermon_name, sermon_pastor, order_type])
 
-        email_body = "Customer Name: " + customer_name, "/nCustomer Address: " + customer_address, "/nCustomer Number: " + customer_number, "Order Type: " + order_type, "/nCustomer Pastor: " + church_pastor, "/nSermon Name: " + sermon_name, "/nSermon Pastor: " + sermon_pastor
+        email_body = "Customer Name: " + customer_name + "\nCustomer Address: " + customer_address + "\nCustomer Number: "+ customer_number + "\nOrder Type: " + order_type + "\nCustomer Pastor: " + church_pastor + "\nSermon Name: " + sermon_name + "\nSermon Pastor: "+ sermon_pastor
 
         # Send email
         
-        message = Message(email_body, recipients=[os.environ.get("email")])
+        message = Message(subject = "Conference Orders", body = email_body, recipients=[os.environ.get("email")])
         mail.send(message)
         return redirect("/")
     else:
